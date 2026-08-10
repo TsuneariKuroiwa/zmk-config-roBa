@@ -40,7 +40,7 @@
 
 &trackball {
     automouse-layer = <4>;
-    scroll-layers = <5>;
+    scroll-layers = <3 5>;  // L3 (英数 hold, matches Keyball39) or L5 (dedicated) → scroll
     snipe-layers = <7>;  // L7 active → CPI drops to SNIPE_CPI (precision mode)
 };
 
