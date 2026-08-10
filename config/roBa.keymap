@@ -106,9 +106,9 @@
         // ===================================================================
         sym_layer {
             bindings = <
-&kp SEMI       &kp LS(N4)      &kp LS(RBKT)   &kp LS(BSLH)  &kp LS(N5)                                        &kp LS(N6)      &kp MINUS     &kp LS(N9)   &kp LS(N8)   &kp LS(MINUS)
-&kp EQUAL      &kp LS(LBKT)    &kp LS(N2)     &kp LS(N7)    &kp INT1      &trans                &trans        &kp FSLH        &kp SQT       &kp NUHS     &kp RBKT     &kp LS(N3)
-&trans         &kp LS(EQUAL)   &kp LS(COMMA)  &kp LS(DOT)   &kp RALT      &trans                &trans        &kp LS(INT1)    &kp LS(N6)    &kp LBKT     &kp LS(N1)   &kp LS(FSLH)
+&kp SEMI       &kp LS(N4)      &kp LS(RBKT)   &kp LS(BSLH)  &kp LS(N5)                                        &kp LS(MINUS)   &kp LS(N8)    &kp LS(N9)   &kp MINUS    &kp LS(N6)
+&kp EQUAL      &kp LS(LBKT)    &kp LS(N2)     &kp LS(N7)    &kp INT1      &trans                &trans        &kp LS(N3)      &kp RBKT      &kp NUHS     &kp SQT      &kp FSLH
+&trans         &kp LS(EQUAL)   &kp LS(COMMA)  &kp LS(DOT)   &kp RALT      &trans                &trans        &kp LS(FSLH)    &kp LS(N1)    &kp LBKT     &kp LS(N6)   &kp LS(INT1)
 &trans         &trans          &trans         &trans        &trans        &trans                &kp LS(INT3)  &kp DEL                                                  &trans
             >;
 
