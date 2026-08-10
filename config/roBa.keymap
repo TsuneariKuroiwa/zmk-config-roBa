@@ -44,6 +44,12 @@
     snipe-layers = <7>;  // L7 active → CPI drops to SNIPE_CPI (precision mode)
 };
 
+// Encoder sensitivity: default 10 triggers per full rotation was too sensitive.
+// Halve it → 1 PgDn per ~72° rotation (was ~36°).
+&sensors {
+    triggers-per-rotation = <5>;
+};
+
 / {
     keymap {
         compatible = "zmk,keymap";
