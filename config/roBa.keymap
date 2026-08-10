@@ -41,6 +41,7 @@
 &trackball {
     automouse-layer = <4>;
     scroll-layers = <5>;
+    snipe-layers = <7>;  // L7 active → CPI drops to SNIPE_CPI (precision mode)
 };
 
 / {
@@ -67,7 +68,7 @@
         tab_layer {
             bindings = <
 &kp F1         &kp F2   &kp F3   &kp F4      &kp F5                                            &kp F6         &kp F7      &kp F8      &kp F9      &kp F10
-&trans         &trans   &trans   &trans      &trans      &trans                 &kp LC(Z)      &kp LC(X)      &mkp LCLK   &mkp MCLK   &mkp RCLK   &kp LS(F5)
+&trans         &trans   &trans   &trans      &tog 7      &trans                 &kp LC(Z)      &kp LC(X)      &mkp LCLK   &mkp MCLK   &mkp RCLK   &kp LS(F5)
 &trans         &trans   &trans   &trans      &trans      &trans                 &kp LC(LS(Z))  &kp LC(C)      &kp LC(V)   &kp PG_UP   &kp PG_DN   &kp F11
 &kp LGUI       &trans   &trans   &trans      &trans      &trans                 &kp INT_MUHENKAN &kp DEL                                            &kp F12
             >;
@@ -139,6 +140,21 @@
 &trans         &trans        &trans        &trans        &trans        &trans                &trans        &trans        &trans        &trans        &trans        &trans
 &trans         &kp N1        &kp N2        &kp N3        &trans        &trans                &bootloader   &trans        &trans        &trans        &trans        &bt BT_CLR
 &trans         &trans        &trans        &trans        &trans        &trans                &trans        &trans                                                  &bt BT_CLR_ALL
+            >;
+        };
+
+        // ===================================================================
+        // L7: SNIPE (precision trackball mode)
+        // Toggled by Tab+G (L1 pos 14) → trackball CPI drops to
+        // CONFIG_PMW3610_SNIPE_CPI (300 vs base 1100).
+        // All keys are trans — only trackball behavior changes.
+        // ===================================================================
+        snipe_layer {
+            bindings = <
+&trans         &trans   &trans   &trans      &trans                                            &trans        &trans      &trans      &trans      &trans
+&trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans        &trans      &trans      &trans      &trans
+&trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans        &trans      &trans      &trans      &trans
+&trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans                                            &trans
             >;
         };
     };
