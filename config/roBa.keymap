@@ -1,148 +1,144 @@
+/*
+ * roBa-LP keymap (Keyball39 mental model port for rock, 2026-08-10)
+ *
+ * Physical position layout (43 slots, roBa Transform order):
+ *   Row 0 (10):  0  1  2  3  4               5  6  7  8  9
+ *   Row 1 (12): 10 11 12 13 14 15         16 17 18 19 20 21
+ *   Row 2 (12): 22 23 24 25 26 27         28 29 30 31 32 33
+ *   Row 3 (9):  34 35 36 37 38 39         40 41              42
+ *
+ * Assumptions to verify with rock:
+ *   pos 15 (L Row1 col5) = encoder click → &mkp MCLK
+ *   pos 27 (L Row2 col5) = LAlt for AquaVoice
+ *   pos 16 = R Row1 additional (rock's "( / Undo")
+ *   pos 28 = R Row2 additional (rock's ") / Redo")
+ *   pos 40 (inner R thumb) = LANG1 かな  ← matches Keyball39 innermost
+ *   pos 41 (outer R thumb) = BS
+ *   pos 42 (far right pinky) = ESC
+ *
+ * JIS layout: `(`=LS(N8), `)`=LS(N9), `|`=LS(INT3), `\`=INT1, `_`=LS(INT1)
+ */
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
+// Silver 40g linear (light switches) → Mod-Tap misfire prevention
 &mt {
-    flavor = "balanced";
-    quick-tap-ms = <0>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <250>;
+    quick-tap-ms = <120>;
+    require-prior-idle-ms = <100>;
+};
+
+&lt {
+    flavor = "tap-preferred";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <120>;
 };
 
 &trackball {
     automouse-layer = <4>;
     scroll-layers = <5>;
-
-    // arrows {
-    //     layers = <3>;
-    //     bindings =
-    //         <&kp RIGHT_ARROW>,
-    //         <&kp LEFT_ARROW>,
-    //         <&kp UP_ARROW>,
-    //         <&kp DOWN_ARROW>;
-
-    //     tick = <10>;
-    //     wait-ms = <5>;
-    //     tap-ms = <5>;
-    // };
 };
 
 / {
-    combos {
-        compatible = "zmk,combos";
-
-        tab {
-            bindings = <&kp TAB>;
-            key-positions = <11 12>;
-        };
-
-        shift_tab {
-            bindings = <&kp LS(TAB)>;
-            key-positions = <12 13>;
-        };
-
-        muhennkann {
-            bindings = <&to_layer_0 INT_MUHENKAN>;
-            key-positions = <11 10>;
-        };
-
-        double_quotation {
-            bindings = <&kp DOUBLE_QUOTES>;
-            key-positions = <20 21>;
-        };
-
-        eq {
-            bindings = <&kp EQUAL>;
-            key-positions = <24 25>;
-        };
-    };
-
-    macros {
-        to_layer_0: to_layer_0 {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
-            label = "TO_LAYER_0";
-        };
-    };
-
-    behaviors {
-        lt_to_layer_0: lt_to_layer_0 {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP_TO_0";
-            bindings = <&mo>, <&to_layer_0>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
+        // ===================================================================
+        // L0: BASE (Keyball39 mental model)
+        // ===================================================================
         default_layer {
             bindings = <
-&kp Q             &kp W         &kp E         &kp R                        &kp T                                                          &kp Y        &kp U  &lt 5 I    &kp O    &kp P
-&kp A             &kp S         &kp D         &kp F                        &kp G        &kp LS(LG(S))                      &kp MINUS      &kp H        &kp J  &kp K      &kp L    &kp SQT
-&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V                        &kp B        &kp COLON                          &kp SEMICOLON  &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&kp LCTRL         &kp LEFT_WIN  &kp LEFT_ALT  &lt_to_layer_0 6 INT_HENKAN  &lt 2 SPACE  &lt_to_layer_0 3 INT_MUHENKAN      &kp BACKSPACE  &lt 1 ENTER                             &kp DEL
+&kp Q          &kp W    &kp E    &kp R       &kp T                                             &kp Y      &kp U    &kp I      &kp O    &kp P
+&kp A          &kp S    &kp D    &kp F       &kp G       &mkp MCLK               &kp LS(N8)    &kp H      &kp J    &kp K      &kp L    &mt RSHIFT RET
+&mt LSHIFT Z   &kp X    &kp C    &kp V       &kp B       &kp LALT                &kp LS(N9)    &kp N      &kp M    &kp COMMA  &kp DOT  &kp MINUS
+&kp LCTRL      &kp LGUI &kp LALT &lt 1 TAB   &lt 2 SPACE &lt 3 LANG2             &kp LANG1     &kp BSPC                                    &kp ESC
             >;
 
-            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
+            sensor-bindings = <&inc_dec_kp UP DOWN>;
         };
 
-        FUNCTION {
+        // ===================================================================
+        // L1: TAB layer (Tab hold) — F keys + mouse + Undo/Redo + copy/paste
+        // ===================================================================
+        tab_layer {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                       &kp F1  &kp F2  &kp F3  &kp F4  &kp F5
-&trans  &trans  &trans  &trans  &trans  &trans      &kp F13  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10
-&trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans  &trans  &trans  &trans  &kp F11
-&trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans                          &kp F12
-            >;
-        };
-
-        NUM {
-            bindings = <
-&kp MINUS                   &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PLUS                                                   &kp CARET         &kp AMPERSAND      &kp TILDE       &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS
-&kp SLASH                   &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp ASTERISK  &kp LC(LA(KP_NUMBER_0))      &kp UNDERSCORE  &kp EXCLAMATION   &kp AT_SIGN        &kp HASH        &kp DOLLAR            &kp PERCENT
-&mt LEFT_SHIFT KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp PERIOD    &kp EQUAL                    &trans          &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp LEFT_BRACE  &kp RIGHT_BRACE       &kp BACKSLASH
-&trans                      &trans           &trans           &trans           &trans        &trans                       &trans          &trans                                                                     &kp PIPE
+&kp F1         &kp F2   &kp F3   &kp F4      &kp F5                                            &kp F6         &kp F7      &kp F8      &kp F9      &kp F10
+&trans         &trans   &trans   &trans      &trans      &trans                 &kp LC(Z)      &kp LC(X)      &mkp LCLK   &mkp MCLK   &mkp RCLK   &kp LS(F5)
+&trans         &trans   &trans   &trans      &trans      &trans                 &kp LC(LS(Z))  &kp LC(C)      &kp LC(V)   &kp PG_UP   &kp PG_DN   &kp F11
+&kp LGUI       &trans   &trans   &trans      &trans      &trans                 &kp INT_MUHENKAN &kp DEL                                            &kp F12
             >;
         };
 
-        ARROW {
+        // ===================================================================
+        // L2: SPACE layer (Space hold) — Nav + Numpad
+        // ===================================================================
+        space_layer {
             bindings = <
-&kp ESCAPE      &kp LC(LS(TAB))         &kp UP_ARROW    &kp LC(TAB)              &trans                       &trans  &trans  &trans  &trans  &trans
-&kp HOME        &kp LEFT_ARROW          &kp DOWN_ARROW  &kp RIGHT_ARROW          &kp END  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&kp LEFT_SHIFT  &kp LG(LS(LEFT_ARROW))  &trans          &kp LG(LS(RIGHT_ARROW))  &trans   &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans          &trans                  &trans          &trans                   &trans   &trans      &trans  &trans                          &trans
-            >;
-
-            sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
-        };
-
-        MOUSE {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                &trans
+&trans         &kp LC(LG(LEFT)) &kp UP    &kp LC(LG(RIGHT))  &trans                                          &trans        &kp N7    &kp N8    &kp N9    &trans
+&kp HOME       &kp LEFT         &kp DOWN  &kp RIGHT          &kp END       &trans                &trans      &kp DOT       &kp N4    &kp N5    &kp N6    &kp LS(F5)
+&trans         &kp LA(LEFT)     &trans    &kp LA(RIGHT)      &trans        &trans                &trans      &kp N0        &kp N1    &kp N2    &kp N3    &trans
+&trans         &trans           &kp DOT   &trans             &trans        &trans                &kp INT_HENKAN &kp DEL                                     &trans
             >;
         };
 
-        SCROLL {
+        // ===================================================================
+        // L3: SYMBOL layer (英数 hold) — JIS symbols
+        // ===================================================================
+        // Faithful port of rock's Keyball39 L3.
+        // Note: 0x0231 (LS(BSLH)) at Row0 col3 keeps rock's original — may not
+        // produce a useful char on JIS OS. Adjust if needed.
+        // ===================================================================
+        sym_layer {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+&kp SEMI       &kp LS(N4)      &kp LS(RBKT)   &kp LS(BSLH)  &kp LS(N5)                                        &kp LS(N6)      &kp MINUS     &kp LS(N9)   &kp LS(N8)   &kp LS(MINUS)
+&kp EQUAL      &kp LS(LBKT)    &kp LS(N2)     &kp LS(N7)    &kp INT1      &trans                &trans        &kp FSLH        &kp SQT       &kp NUHS     &kp RBKT     &kp LS(N3)
+&trans         &kp LS(EQUAL)   &kp LS(COMMA)  &kp LS(DOT)   &kp RALT      &trans                &trans        &kp LS(INT1)    &kp LS(N6)    &kp LBKT     &kp LS(N1)   &kp LS(FSLH)
+&trans         &trans          &trans         &trans        &trans        &trans                &kp LS(INT3)  &kp DEL                                                  &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+        };
+
+        // ===================================================================
+        // L4: AUTO-MOUSE (auto-activated by trackball movement)
+        // J K L = MB1 / MB3 / MB2 (Keyball39 pattern)
+        // ===================================================================
+        auto_mouse {
+            bindings = <
+&trans         &trans   &trans   &trans      &trans                                            &trans        &trans      &trans      &trans      &trans
+&trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans        &mkp LCLK   &mkp MCLK   &mkp RCLK   &trans
+&trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans        &trans      &trans      &trans      &trans
+&trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans                                            &trans
             >;
         };
 
-        layer_6 {
+        // ===================================================================
+        // L5: SCROLL (trackball scroll when this layer is active)
+        // No key currently activates L5 — add &mo 5 to a key later if wanted.
+        // ===================================================================
+        scroll_layer {
             bindings = <
-&trans  &trans        &trans        &trans        &trans                           &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
-&trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans        &trans        &trans        &trans        &trans
-&trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans  &trans      &bootloader  &trans        &trans        &trans        &trans        &bt BT_CLR
-&trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans                                                  &bt BT_CLR_ALL
+&trans         &trans   &trans   &trans      &trans                                            &trans        &trans      &trans      &trans      &trans
+&trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans        &trans      &trans      &trans      &trans
+&trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans        &trans      &trans      &trans      &trans
+&trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans                                            &trans
+            >;
+        };
+
+        // ===================================================================
+        // L6: SYSTEM (BT selection + bootloader)
+        // No key currently activates L6 — add &mo 6 to a key later.
+        // ===================================================================
+        system_layer {
+            bindings = <
+&trans         &trans        &trans        &trans        &trans                                            &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+&trans         &trans        &trans        &trans        &trans        &trans                &trans        &trans        &trans        &trans        &trans        &trans
+&trans         &kp N1        &kp N2        &kp N3        &trans        &trans                &bootloader   &trans        &trans        &trans        &trans        &bt BT_CLR
+&trans         &trans        &trans        &trans        &trans        &trans                &trans        &trans                                                  &bt BT_CLR_ALL
             >;
         };
     };
