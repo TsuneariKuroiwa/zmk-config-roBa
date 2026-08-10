@@ -45,17 +45,6 @@
 };
 
 / {
-    // Custom sensor behavior: encoder rotation → real mouse wheel HID report
-    // (&inc_dec_kp sends arrow keys, which terminals interpret as history nav)
-    behaviors {
-        encoder_scroll: encoder_scroll {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
-            // rock: CW = scroll down (natural). Swap the two lines above if reversed.
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
@@ -70,7 +59,7 @@
 &kp LCTRL      &kp LGUI &kp LALT &lt 1 TAB   &lt 2 SPACE &lt 3 LANG2             &kp LANG1     &kp BSPC                                    &kp ESC
             >;
 
-            sensor-bindings = <&encoder_scroll>;  // real mouse wheel scroll
+            sensor-bindings = <&inc_dec_kp PG_DN PG_UP>;  // CW=PgDn (natural scroll direction)
         };
 
         // ===================================================================
