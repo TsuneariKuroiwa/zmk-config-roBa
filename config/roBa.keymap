@@ -1,20 +1,21 @@
 /*
- * roBa-LP keymap (Keyball39 mental model port for rock, 2026-08-10)
+ * roBa-LP keymap (Keyball39 mental model port for rock, 2026-08-10, updated 2026-08-11)
  *
- * Physical position layout (43 slots, roBa Transform order):
- *   Row 0 (10):  0  1  2  3  4               5  6  7  8  9
- *   Row 1 (12): 10 11 12 13 14 15         16 17 18 19 20 21
- *   Row 2 (12): 22 23 24 25 26 27         28 29 30 31 32 33
- *   Row 3 (9):  34 35 36 37 38 39         40 41              42
+ * Physical position layout (44 slots after adding (0,5) encoder click):
+ *   Row 0 (11):  0  1  2  3  4  5           6  7  8  9 10
+ *   Row 1 (12): 11 12 13 14 15 16        17 18 19 20 21 22
+ *   Row 2 (12): 23 24 25 26 27 28        29 30 31 32 33 34
+ *   Row 3 (9):  35 36 37 38 39 40        41 42              43
  *
- * Assumptions to verify with rock:
- *   pos 15 (L Row1 col5) = encoder click → &mkp MCLK
- *   pos 27 (L Row2 col5) = LAlt for AquaVoice
- *   pos 16 = R Row1 additional (rock's "( / Undo")
- *   pos 28 = R Row2 additional (rock's ") / Redo")
- *   pos 40 (inner R thumb) = LANG1 かな  ← matches Keyball39 innermost
- *   pos 41 (outer R thumb) = BS
- *   pos 42 (far right pinky) = ESC
+ * Key positions:
+ *   pos 5  (L Row0 col5) = encoder click → &mkp MCLK
+ *   pos 16 (L Row1 col5) = encoder body space (no physical switch) → &none
+ *   pos 28 (L Row2 col5) = RAlt for AquaVoice
+ *   pos 17 = R Row1 additional (rock's "( / Undo")
+ *   pos 29 = R Row2 additional (rock's ") / Redo")
+ *   pos 41 (inner R thumb) = LANG1 かな  ← matches Keyball39 innermost
+ *   pos 42 (outer R thumb) = BS
+ *   pos 43 (far right pinky) = ESC
  *
  * JIS layout: `(`=LS(N8), `)`=LS(N9), `|`=LS(INT3), `\`=INT1, `_`=LS(INT1)
  */
@@ -59,9 +60,9 @@
         // ===================================================================
         default_layer {
             bindings = <
-&kp Q          &kp W    &kp E    &kp R       &kp T                                             &kp Y      &kp U    &kp I      &kp O    &kp P
-&kp A          &kp S    &kp D    &kp F       &kp G       &mkp MCLK               &kp LS(N8)    &kp H      &kp J    &kp K      &kp L    &mt RSHIFT RET
-&mt LSHIFT Z   &kp X    &kp C    &kp V       &kp B       &kp CAPS                &kp LS(N9)    &kp N      &kp M    &kp COMMA  &kp DOT  &kp MINUS
+&kp Q          &kp W    &kp E    &kp R       &kp T       &mkp MCLK                             &kp Y      &kp U    &kp I      &kp O    &kp P
+&kp A          &kp S    &kp D    &kp F       &kp G       &none                   &kp LS(N8)    &kp H      &kp J    &kp K      &kp L    &mt RSHIFT RET
+&mt LSHIFT Z   &kp X    &kp C    &kp V       &kp B       &kp RALT                &kp LS(N9)    &kp N      &kp M    &kp COMMA  &kp DOT  &kp MINUS
 &kp LCTRL      &kp LGUI &kp LALT &lt 1 TAB   &lt 2 SPACE &lt 3 LANG2             &kp LANG1     &kp BSPC                                    &kp ESC
             >;
 
@@ -73,7 +74,7 @@
         // ===================================================================
         tab_layer {
             bindings = <
-&kp F1         &kp F2   &kp F3   &kp F4      &kp F5                                            &kp F6         &kp F7      &kp F8      &kp F9      &kp F10
+&kp F1         &kp F2   &kp F3   &kp F4      &kp F5      &trans                                &kp F6         &kp F7      &kp F8      &kp F9      &kp F10
 &trans         &trans   &trans   &trans      &tog 7      &trans                 &kp LC(Z)      &kp LC(X)      &mkp LCLK   &mkp MCLK   &mkp RCLK   &kp LS(F5)
 &trans         &trans   &trans   &trans      &trans      &trans                 &kp LC(LS(Z))  &kp LC(C)      &kp LC(V)   &kp PG_UP   &kp PG_DN   &kp F11
 &kp LGUI       &trans   &trans   &trans      &trans      &trans                 &kp INT_MUHENKAN &kp DEL                                            &kp F12
@@ -85,7 +86,7 @@
         // ===================================================================
         space_layer {
             bindings = <
-&trans         &kp LC(LG(LEFT)) &kp UP    &kp LC(LG(RIGHT))  &trans                                          &trans        &kp N7    &kp N8    &kp N9    &trans
+&trans         &kp LC(LG(LEFT)) &kp UP    &kp LC(LG(RIGHT))  &trans        &trans                            &trans        &kp N7    &kp N8    &kp N9    &trans
 &kp HOME       &kp LEFT         &kp DOWN  &kp RIGHT          &kp END       &trans                &trans      &kp DOT       &kp N4    &kp N5    &kp N6    &kp LS(F5)
 &trans         &kp LA(LEFT)     &trans    &kp LA(RIGHT)      &trans        &trans                &trans      &kp N0        &kp N1    &kp N2    &kp N3    &trans
 &trans         &trans           &kp DOT   &trans             &trans        &trans                &kp INT_HENKAN &kp DEL                                     &trans
@@ -101,7 +102,7 @@
         // ===================================================================
         sym_layer {
             bindings = <
-&kp SEMI       &kp LS(N4)      &kp LS(RBKT)   &kp LS(BSLH)  &kp LS(N5)                                        &kp LS(MINUS)   &kp LS(N8)    &kp LS(N9)   &kp MINUS    &kp LS(SEMI)
+&kp SEMI       &kp LS(N4)      &kp LS(RBKT)   &kp LS(BSLH)  &kp LS(N5)    &trans                                &kp LS(MINUS)   &kp LS(N8)    &kp LS(N9)   &kp MINUS    &kp LS(SEMI)
 &kp EQUAL      &kp LS(LBKT)    &kp LS(N7)     &kp LS(N2)    &kp INT1      &trans                &trans        &kp LS(N3)      &kp RBKT      &kp NUHS     &kp SQT      &kp FSLH
 &trans         &kp LS(EQUAL)   &kp LS(COMMA)  &kp LS(DOT)   &kp RALT      &trans                &trans        &kp LS(FSLH)    &kp LS(N1)    &kp LBKT     &kp LS(N6)   &kp LS(INT1)
 &trans         &trans          &trans         &trans        &trans        &trans                &kp LS(INT3)  &kp DEL                                                  &trans
@@ -116,7 +117,7 @@
         // ===================================================================
         auto_mouse {
             bindings = <
-&trans         &trans   &trans   &trans      &trans                                            &trans        &trans      &trans      &trans      &trans
+&trans         &trans   &trans   &trans      &trans      &trans                                &trans        &trans      &trans      &trans      &trans
 &trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans        &mkp LCLK   &mkp MCLK   &mkp RCLK   &trans
 &trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans        &trans      &trans      &trans      &trans
 &trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans                                            &trans
@@ -129,7 +130,7 @@
         // ===================================================================
         scroll_layer {
             bindings = <
-&trans         &trans   &trans   &trans      &trans                                            &trans        &trans      &trans      &trans      &trans
+&trans         &trans   &trans   &trans      &trans      &trans                                &trans        &trans      &trans      &trans      &trans
 &trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans        &trans      &trans      &trans      &trans
 &trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans        &trans      &trans      &trans      &trans
 &trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans                                            &trans
@@ -142,7 +143,7 @@
         // ===================================================================
         system_layer {
             bindings = <
-&trans         &trans        &trans        &trans        &trans                                            &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+&trans         &trans        &trans        &trans        &trans        &trans                                &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
 &trans         &trans        &trans        &trans        &trans        &trans                &trans        &trans        &trans        &trans        &trans        &trans
 &trans         &kp N1        &kp N2        &kp N3        &trans        &trans                &bootloader   &trans        &trans        &trans        &trans        &bt BT_CLR
 &trans         &trans        &trans        &trans        &trans        &trans                &trans        &trans                                                  &bt BT_CLR_ALL
@@ -157,7 +158,7 @@
         // ===================================================================
         snipe_layer {
             bindings = <
-&trans         &trans   &trans   &trans      &trans                                            &trans        &trans      &trans      &trans      &trans
+&trans         &trans   &trans   &trans      &trans      &trans                                &trans        &trans      &trans      &trans      &trans
 &trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans        &trans      &trans      &trans      &trans
 &trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans        &trans      &trans      &trans      &trans
 &trans         &trans   &trans   &trans      &trans      &trans                &trans          &trans                                            &trans
