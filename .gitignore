@@ -1,0 +1,10 @@
+# west workspace state (if accidentally created in fork root)
+.west/
+zmk/
+zephyr-project/
+modules/
+zmk-pmw3610-driver/
+build/
+
+# Local uf2 output (kept per-machine)
+uf2/
