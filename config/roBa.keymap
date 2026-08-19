@@ -41,7 +41,7 @@
 };
 
 &trackball {
-    automouse-layer = <0>;  // disabled — rock: re-enable after switching to CoroPit (shorter trackball, less finger brushing)
+    automouse-layer = <4>;  // re-enabled for CoroPit (2026-08-19, shorter trackball = less finger brushing)
     scroll-layers = <3 5>;  // L3 (英数 hold, matches Keyball39) or L5 (dedicated) → scroll
     snipe-layers = <7>;  // L7 active → CPI drops to SNIPE_CPI (precision mode)
 };
