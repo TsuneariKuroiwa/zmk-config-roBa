@@ -16,8 +16,8 @@ layers:
   - D
   - F
   - G
-  - '&mkp MCLK'
-  - Sft+8
+  - 🔇
+  - (
   - H
   - J
   - K
@@ -28,20 +28,20 @@ layers:
   - C
   - V
   - B
-  - RALT
-  - Sft+9
+  - RAlt
+  - )
   - N
   - M
-  - ','
-  - .
-  - '-'
+  - COMMA
+  - DOT
+  - MINUS
   - LCTRL
-  - LGUI
+  - LWin
   - LALT
   - {t: TAB, h: tab}
   - {t: SPACE, h: space}
-  - {t: LANG2, h: sym}
-  - LANG1
+  - {t: 英数, h: sym}
+  - {t: かな, h: system}
   - BSPC
   - ESC
   tab:
@@ -61,38 +61,38 @@ layers:
   - {t: ▽, type: trans}
   - {t: snipe, h: toggle}
   - {t: ▽, type: trans}
-  - Ctl+Z
-  - Ctl+X
+  - Undo
+  - Cut
   - '&mkp LCLK'
   - '&mkp MCLK'
   - '&mkp RCLK'
-  - Sft+F5
+  - S+F5
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - Ctl+Sft+Z
-  - Ctl+C
-  - Ctl+V
+  - Redo
+  - Copy
+  - Paste
   - PG UP
   - PG DN
   - F11
-  - LGUI
+  - LWin
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {type: held}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - INT MUHENKAN
+  - 無変換
   - DEL
   - F12
   space:
   - {t: ▽, type: trans}
-  - Ctl+Gui+LEFT
+  - 🖥←
   - UP
-  - Ctl+Gui+RIGHT
+  - 🖥→
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - '7'
@@ -106,15 +106,15 @@ layers:
   - END
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - .
+  - DOT
   - '4'
   - '5'
   - '6'
-  - Sft+F5
+  - S+F5
   - {t: ▽, type: trans}
-  - Alt+LEFT
+  - ← Back
   - {t: ▽, type: trans}
-  - Alt+RIGHT
+  - Fwd →
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -125,55 +125,55 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - .
+  - DOT
   - {t: ▽, type: trans}
   - {type: held}
   - {t: ▽, type: trans}
-  - INT HENKAN
+  - 変換
   - DEL
   - {t: ▽, type: trans}
   sym:
-  - ;
-  - Sft+4
-  - Sft+]
-  - Sft+\
-  - Sft+5
-  - Sft+-
-  - Sft+8
-  - Sft+9
-  - '-'
-  - Sft+;
+  - SEMI
+  - $
+  - '{'
+  - (?)
+  - '%'
   - '='
-  - Sft+[
-  - Sft+7
-  - Sft+2
-  - INT1
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - Sft+3
-  - ']'
-  - '#'
+  - (
+  - )
+  - MINUS
+  - +
+  - ^
+  - '`'
   - ''''
-  - /
-  - {t: ▽, type: trans}
-  - Sft+=
-  - Sft+,
-  - Sft+.
-  - RALT
+  - '"'
+  - \
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - Sft+/
-  - Sft+1
+  - '#'
   - '['
-  - Sft+6
-  - Sft+INT1
+  - ']'
+  - ':'
+  - FSLH
+  - {t: ▽, type: trans}
+  - '~'
+  - <
+  - '>'
+  - RAlt
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '?'
+  - '!'
+  - '@'
+  - '&'
+  - _
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {type: held}
-  - Sft+INT3
+  - '|'
   - DEL
   - {t: ▽, type: trans}
   auto_mouse:
@@ -305,7 +305,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - {type: held}
   - {t: ▽, type: trans}
   - BT CLR ALL
   snipe:
