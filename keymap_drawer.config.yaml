@@ -1,0 +1,74 @@
+# keymap-drawer config — JIS layout labels for rock's OS
+# Overrides US HID display → actual JIS chars typed
+
+parse_config:
+  # Base identifiers → JIS-friendly labels
+  zmk_keycode_map:
+    # International (JIS-specific)
+    INT1: "\\"
+    INT2: "カナ"
+    INT3: "¥"
+    INT4: "変換"
+    INT5: "無変換"
+    INT_HENKAN: "変換"
+    INT_MUHENKAN: "無変換"
+    # LANG (IME switch)
+    LANG1: "かな"
+    LANG2: "英数"
+    # Consumer
+    C_MUTE: "🔇"
+    C_VOL_UP: "Vol+"
+    C_VOL_DN: "Vol-"
+    # Symbols (unshifted, JIS interpretation)
+    EQUAL: "^"      # JIS ^ key
+    LBKT: "@"       # JIS @ key
+    RBKT: "["       # JIS [ key
+    NUHS: "]"       # JIS ] key
+    SQT: ":"        # JIS : key
+    # Layer labels
+    RALT: "RAlt"
+    LGUI: "LWin"
+    RGUI: "RWin"
+    # Special
+    CAPS: "CapsLk"
+
+  # Modified combos (JIS interpretation of Shift + HID key)
+  raw_binding_map:
+    # Shift + number row (JIS)
+    "&kp LS(N1)": "!"
+    "&kp LS(N2)": '"'
+    "&kp LS(N3)": "#"
+    "&kp LS(N4)": "$"
+    "&kp LS(N5)": "%"
+    "&kp LS(N6)": "&"
+    "&kp LS(N7)": "'"
+    "&kp LS(N8)": "("
+    "&kp LS(N9)": ")"
+    # Shift + JIS symbols
+    "&kp LS(MINUS)": "="       # JIS Shift+- = =
+    "&kp LS(EQUAL)": "~"       # JIS Shift+^ = ~
+    "&kp LS(LBKT)": "`"        # JIS Shift+@ = `
+    "&kp LS(RBKT)": "{"        # JIS Shift+[ = {
+    "&kp LS(NUHS)": "}"        # JIS Shift+] = }
+    "&kp LS(SEMI)": "+"        # JIS Shift+; = +
+    "&kp LS(SQT)": "*"         # JIS Shift+: = *
+    "&kp LS(COMMA)": "<"
+    "&kp LS(DOT)": ">"
+    "&kp LS(FSLH)": "?"
+    "&kp LS(BSLH)": "(?)"      # JIS doesn't have US backslash key, dubious
+    "&kp LS(INT1)": "_"        # JIS Shift+ろ = _
+    "&kp LS(INT3)": "|"        # JIS Shift+¥ = |
+    # LANG modifier combos
+    "&kp LS(LANG2)": "S+英数"
+    # Function key + Shift
+    "&kp LS(F5)": "S+F5"
+    # Common LC/LG combos (Windows)
+    "&kp LC(LG(LEFT))": "🖥←"
+    "&kp LC(LG(RIGHT))": "🖥→"
+    "&kp LC(Z)": "Undo"
+    "&kp LC(X)": "Cut"
+    "&kp LC(C)": "Copy"
+    "&kp LC(V)": "Paste"
+    "&kp LC(LS(Z))": "Redo"
+    "&kp LA(LEFT)": "← Back"
+    "&kp LA(RIGHT)": "Fwd →"
