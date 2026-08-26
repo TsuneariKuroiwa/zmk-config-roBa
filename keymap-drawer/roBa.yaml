@@ -155,7 +155,7 @@ layers:
   - ']'
   - ':'
   - FSLH
-  - {t: ▽, type: trans}
+  - '|'
   - '~'
   - <
   - '>'
@@ -173,7 +173,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {type: held}
-  - '|'
+  - CapsLk
   - DEL
   - {t: ▽, type: trans}
   auto_mouse:
@@ -284,7 +284,7 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - Ctl+Alt+K
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
