@@ -28,7 +28,7 @@
 
 // Silver 40g linear (light switches) → Mod-Tap misfire prevention
 &mt {
-    flavor = "tap-preferred";
+    flavor = "balanced";
     tapping-term-ms = <250>;
     quick-tap-ms = <120>;
     require-prior-idle-ms = <100>;
